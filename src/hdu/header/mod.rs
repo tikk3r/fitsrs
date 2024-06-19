@@ -201,7 +201,7 @@ where
         Ok(Self { cards, xtension })
     }
 
-    pub fn parse_header<R: Read>(
+    pub fn parse_header<R: Read>(&self, 
         reader: &mut R,
     ) -> Result<Self, Error> {
         let mut card_80_bytes_buf: [u8; 80] = [0; 80];
