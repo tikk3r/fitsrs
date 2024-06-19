@@ -201,6 +201,14 @@ where
         Ok(Self { cards, xtension })
     }
 
+    pub fn parse_header<R: Read>(
+        reader: &mut R,
+    ) -> Result<Self, Error> {
+        let mut card_80_bytes_buf: [u8; 80] = [0; 80];
+        let mut num_bytes_read = 0;
+        Self::parse(reader, &mut num_bytes_read, &mut card_80_bytes_buf)
+    }
+
     pub(crate) async fn parse_async<'a, R>(
         reader: &mut R,
         num_bytes_read: &mut u64,
