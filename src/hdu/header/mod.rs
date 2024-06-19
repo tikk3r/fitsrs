@@ -206,6 +206,8 @@ where
     ) -> Result<Self, Error> {
         let mut card_80_bytes_buf: [u8; 80] = [0; 80];
         let mut num_bytes_read = 0;
+        consume_next_card(reader, &mut card_80_bytes_buf, &mut num_bytes_read)?;
+        let _ = check_card_keyword(&card_80_bytes_buf, b"SIMPLE  ")?;
         Self::parse(reader, &mut num_bytes_read, &mut card_80_bytes_buf)
     }
 
