@@ -201,7 +201,6 @@ where
         Ok(Self { cards, xtension })
     }
 
-<<<<<<< HEAD
     pub fn parse_header<R: Read>(
         reader: &mut R,
     ) -> Result<Self, Error> {
@@ -210,8 +209,6 @@ where
         Self::parse(reader, &mut num_bytes_read, &mut card_80_bytes_buf)
     }
 
-=======
->>>>>>> parent of 7e0f9a1 (Add method to just read the header)
     pub(crate) async fn parse_async<'a, R>(
         reader: &mut R,
         num_bytes_read: &mut u64,
