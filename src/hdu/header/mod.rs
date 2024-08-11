@@ -201,7 +201,7 @@ where
         Ok(Self { cards, xtension })
     }
 
-    pub fn parse_header<R: Read>(
+    pub fn parse_only_header<R: Read>(
         reader: &mut R,
     ) -> Result<Self, Error> {
         let mut card_80_bytes_buf: [u8; 80] = [0; 80];
@@ -209,6 +209,10 @@ where
         consume_next_card(reader, &mut card_80_bytes_buf, &mut num_bytes_read)?;
         let _ = check_card_keyword(&card_80_bytes_buf, b"SIMPLE  ")?;
         Self::parse(reader, &mut num_bytes_read, &mut card_80_bytes_buf)
+    }
+
+    pub fn get_header_cards(&self) -> &HashMap<[u8; 8], Value> {
+        &self.cards
     }
 
     pub(crate) async fn parse_async<'a, R>(
